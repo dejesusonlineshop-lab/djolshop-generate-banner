@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<meta charset="UTF-8">
+<title>Product Banner Generator</title>
+
+<style>
+
+body{
+    font-family:Arial, sans-serif;
+    background:#f4f4f4;
+    padding:20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.toolbar{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    box-shadow:0 2px 5px rgba(0,0,0,.1);
+}
+
+input{
+    width:300px;
+    padding:10px;
+    font-size:16px;
+}
+
+button{
+    padding:10px 20px;
+    font-size:16px;
+    background:#6F4E37;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#5a3f2d;
+}
+
+/* Instagram Post */
+
+#banner{
+    width:1080px;
+    height:1080px;
+    background-image: url("https://drive.google.com/thumbnail?id=14wxhxkaOUhia79gFS1hBiKMeDb4bv2Z1");
+    position:relative;
+    overflow:hidden;
+    border:1px solid #ccc;
+}
+
+/* Product Header */
+
+.product-header{
+    position:absolute;
+    top:30px;
+    left:30px;
+    width:700px;
+    background:#866456;
+    color:white;
+    border-radius:30px;
+    text-align:center;
+    padding:20px;
+}
+
+.product-name{
+    font-size:48px;
+    font-weight:bold;
+}
+
+.product-code{
+    font-size:28px;
+    margin-top:10px;
+}
+
+/* Product Image Placeholder */
+
+.product-image{
+    position:absolute;
+    left:50px;
+    bottom:120px;
+    width:650px;
+    height:650px;
+    background:#ddd;
+    border-radius:30px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
+    color:#666;
+}
+
+/* Price Card */
+
+.price-card{
+    position:absolute;
+    right:80px;
+    top:200px;
+    width:280px;
+    background:#d8b48a;
+    padding:30px;
+    transform:rotate(-5deg);
+    box-shadow:5px 5px 12px rgba(0,0,0,.2);
+}
+
+.price-card p{
+    text-align:center;
+    font-size:24px;
+}
+
+
+.pin{
+    position:absolute;
+    top:-35px;
+    left:50%;
+    transform:translateX(-50%);
+    width:70px;
+    z-index:10;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="toolbar">
+
+    <input
+        type="text"
+        id="itemCode"
+        placeholder="Enter Item Code">
+
+    <button onclick="generateBanner()">
+        Generate
+    </button>
+
+    <button onclick="downloadBanner()">
+        Download PNG
+    </button>
+
+</div>
+
+    <div id="banner">
+
+        <div class="product-header">
+            <div class="product-name" id="productName">
+                PRODUCT NAME
+            </div>
+
+            <div class="product-code" id="productCode">
+                ITEM CODE
+            </div>
+        </div>
+
+    <img
+    id="productImage"
+    class="product-image"
+    src="">
+    
+    
+     <div class="price-card">
+
+    
+	<img
+        id="pin"
+        class="pin"
+        src="pinned.png">
+
+    <p id="downPayment"></p>
+    <p id="weeklyPayment"></p>
+    <p id="term"></p>
+    <p id="cash"></p>
+    </div>
+
+</div>
+
+<script>
+
+async function generateBanner() {
+     
+   const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxh8dYxbv9QlBn7rWNM3UXNtOjppABNLT-zxUr0otcdNIY6ZWnXmIHHaEuVUTWdYQcb/exec";
+    const itemCode =
+        document.getElementById("itemCode").value;
+
+    const response =
+        await fetch(WEB_APP_URL + "?itemCode=" + itemCode);
+
+    const data =
+        await response.json();
+    console.log(data);
+    document.getElementById("productName").innerText =
+    data.itemName;
+
+document.getElementById("productCode").innerText =
+    data.itemCode;
+
+document.getElementById("productImage").src =
+    data.imageUrl;
+
+document.getElementById("downPayment").innerHTML =
+    "<b>DOWN:</b> " + data.downPayment;
+
+document.getElementById("weeklyPayment").innerText =
+    data.weeklyPayment + " / weekly";
+
+document.getElementById("term").innerText =
+    data.term + " weeks to pay";
+
+document.getElementById("cash").innerText =
+    "Cash: " + data.cash;
+}
+
+//download
+/*async function downloadBanner() {
+
+    const banner =
+        document.getElementById("banner");
+
+    const canvas =
+        await html2canvas(banner, {
+            scale: 3,
+            useCORS: true,
+            backgroundColor: null
+        });
+
+    const link =
+        document.createElement("a");
+
+    const itemCode =
+        document.getElementById("productCode").innerText;
+
+    link.download =
+        itemCode + ".png";
+
+    link.href =
+        canvas.toDataURL("image/png");
+
+    link.click();
+}*/
+</script>
+
+</body>
+</html>
