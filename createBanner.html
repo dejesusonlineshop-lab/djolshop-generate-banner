@@ -3,6 +3,13 @@
 <head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <meta charset="UTF-8">
+
+  <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+
 <title>Product Banner Generator</title>
 
 <style>
@@ -51,11 +58,32 @@ button:hover{
 #banner{
     width:1080px;
     height:1080px;
-    background-image: url("https://drive.google.com/thumbnail?id=14wxhxkaOUhia79gFS1hBiKMeDb4bv2Z1");
+    background-image: url("djbackground.jpg");
+    //background-color: #C68642;
     position:relative;
     overflow:hidden;
     border:1px solid #ccc;
 }
+/*Order*/
+.order-header{
+    position:absolute;
+    bottom:380px;
+    left:800px;
+    width:200px;
+    height: 30px;
+    background:#d03d1d;
+    border-radius:30px;
+    text-align:center;
+    padding:20px;
+}
+
+.ordernow{
+    font-family:'DM Sans',sans-serif;
+    font-size:30px;
+    font-weight:bold;
+    color:white;
+}
+
 
 /* Product Header */
 
@@ -64,21 +92,40 @@ button:hover{
     top:30px;
     left:30px;
     width:700px;
-    background:#866456;
+    background:#f6c0a6;
     color:white;
     border-radius:30px;
     text-align:center;
     padding:20px;
 }
 
+.product-code-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px; /* Space between line and text */
+    margin-top:10px;
+}
+
+
 .product-name{
-    font-size:48px;
+    font-family:'DM Sans',sans-serif;
+    font-size:40px;
     font-weight:bold;
+    color:#b93028;
 }
 
 .product-code{
-    font-size:28px;
-    margin-top:10px;
+    font-family:'DM Sans',sans-serif;
+    font-size:22px;
+    margin-top:8px;
+    color:#b93028;
+}
+
+.code-line{
+    width:110px;
+    height:2px;
+    background:linear-gradient(to right,#c68b3d,#e0b46d,#c68b3d);
 }
 
 /* Product Image Placeholder */
@@ -86,26 +133,25 @@ button:hover{
 .product-image{
     position:absolute;
     left:50px;
-    bottom:120px;
+    bottom:210px;
     width:650px;
-    height:650px;
-    background:#ddd;
-    border-radius:30px;
+    height:600px;
+    border: 2px solid #c68b3d;
+    padding: 10px;
+    border-radius: 30px;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:30px;
-    color:#666;
-}
+   }
 
 /* Price Card */
 
 .price-card{
     position:absolute;
-    right:80px;
-    top:200px;
+    right:10px;
+    top:210px;
     width:280px;
-    background:#d8b48a;
+    background: #f6c0a6;
     padding:30px;
     transform:rotate(-5deg);
     box-shadow:5px 5px 12px rgba(0,0,0,.2);
@@ -113,8 +159,11 @@ button:hover{
 
 .price-card p{
     text-align:center;
-    font-size:24px;
+    font-size:28px;
+    font-family:'DM Sans',sans-serif;
+    color:#98160e;
 }
+
 
 
 .pin{
@@ -125,6 +174,23 @@ button:hover{
     width:70px;
     z-index:10;
 }
+
+.logo{
+    position:absolute;
+    right:940px;
+    bottom:915px;
+    width:105px;
+    height:105px;
+    background-image:url("djlogo.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    border: 2px solid #0f5b60;
+    padding: 10px;
+    border-radius: 25px;
+
+}
+
 
 
 </style>
@@ -157,10 +223,13 @@ button:hover{
             <div class="product-name" id="productName">
                 PRODUCT NAME
             </div>
-
+	    <div class="product-code-row">
+            <div class="code-line"></div>     
             <div class="product-code" id="productCode">
                 ITEM CODE
             </div>
+            <div class="code-line"></div>
+	</div>
         </div>
 
     <img
@@ -182,6 +251,16 @@ button:hover{
     <p id="term"></p>
     <p id="cash"></p>
     </div>
+
+<div class="order-header">
+            <div class="ordernow">
+                ORDER NOW
+            </div>
+</div>
+
+<div class="logo">
+</div>
+
 
 </div>
 
@@ -209,7 +288,7 @@ document.getElementById("productImage").src =
     data.imageUrl;
 
 document.getElementById("downPayment").innerHTML =
-    "<b>DOWN:</b> " + data.downPayment;
+    "<b>DOWN:</b> " + "<b>" + data.downPayment + "<b>";
 
 document.getElementById("weeklyPayment").innerText =
     data.weeklyPayment + " / weekly";
