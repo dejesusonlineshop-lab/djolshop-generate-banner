@@ -58,7 +58,7 @@ button:hover{
 #banner{
     width:1080px;
     height:1080px;
-    background-image: url("djbackground.jpg");
+    background-image: url("https://res.cloudinary.com/sqqgvv9f/image/upload/v1783441458/djbackground_ylmkb4.jpg");
     //background-color: #C68642;
     position:relative;
     overflow:hidden;
@@ -188,13 +188,20 @@ button:hover{
     z-index:10;
 }
 
+#textps{
+    font-size:12px;
+    font-family:'DM Sans',sans-serif;
+    color:#98160e;
+    z-index:10;
+}
+
 .logo{
     position:absolute;
     right:940px;
     bottom:915px;
     width:105px;
     height:105px;
-    background-image:url("djlogo.png");
+    background-image:url("https://res.cloudinary.com/sqqgvv9f/image/upload/v1783441459/djlogo_qlsooh.png");
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
@@ -218,7 +225,8 @@ button:hover{
     <input
         type="text"
         id="itemCode"
-        placeholder="Enter Item Code">
+        placeholder="Enter Item Code"
+        oninput="this.value=this.value.toUpperCase()">
 
     <button onclick="generateBanner()">
         Generate
@@ -257,12 +265,13 @@ button:hover{
 	<img
         id="pin"
         class="pin"
-        src="pinned.png">
+        src="https://res.cloudinary.com/sqqgvv9f/image/upload/v1783441955/pinned_iib153.png">
 
     <p id="downPayment"></p>
     <p id="weeklyPayment"></p>
     <p id="term"></p>
     <p id="cash"></p>
+    <p id="textps"><i>**Subject to change depend on supplier</i></p>
     </div>
 
 <div class="order-header">
@@ -270,8 +279,9 @@ button:hover{
                 ORDER NOW
             </div>
 </div>
-
 <div class="logo">
+
+
 </div>
 
 
@@ -314,7 +324,7 @@ document.getElementById("cash").innerText =
 }
 
 //download
-/*async function downloadBanner() {
+async function downloadBanner() {
 
     const banner =
         document.getElementById("banner");
@@ -324,6 +334,7 @@ document.getElementById("cash").innerText =
             scale: 3,
             useCORS: true,
             backgroundColor: null
+   
         });
 
     const link =
@@ -339,7 +350,7 @@ document.getElementById("cash").innerText =
         canvas.toDataURL("image/png");
 
     link.click();
-}*/
+}
 </script>
 
 </body>
